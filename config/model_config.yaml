@@ -1,0 +1,320 @@
+# Pythia ML Model Configuration
+# Based on implementation guide specifications
+
+# CNN-LSTM Hybrid Architecture (per guide: 82.44% accuracy)
+model_architecture:
+  name: "SpikeCNNLSTM"
+  type: "hybrid"
+
+  # Input configuration
+  input:
+    sequence_length: 60  # 30-60 day lookback converted to 5m bars (guide)
+    n_features: 24  # Optimized feature set for pre-spike detection
+
+  # CNN layers
+  cnn:
+    filters: 64  # Per guide specification
+    kernel_size: 3  # Per guide specification
+    padding: 1  # Same padding
+    activation: "relu"
+    batch_norm: true
+    dropout: 0.5  # 50% dropout per guide
+
+  # LSTM layers
+  lstm:
+    layer1_units: 128  # Per guide specification
+    layer2_units: 80  # Per guide specification
+    activation: "tanh"
+    batch_norm: true
+    dropout: 0.5  # 50% dropout per guide
+    bidirectional: false
+
+  # Output layer
+  output:
+    units: 1  # Binary classification
+    activation: "sigmoid"
+
+# Alternative architectures for ensemble
+alternative_architectures:
+  # GRU variant (60% faster training per guide)
+  gru:
+    enabled: true
+    layer1_units: 128
+    layer2_units: 80
+    dropout: 0.5
+
+  # TCN variant (parallel processing per guide)
+  tcn:
+    enabled: true
+    num_channels: [64, 128, 80]
+    kernel_size: 3
+    dropout: 0.5
+
+  # Transformer variant (state-of-art per guide)
+  transformer:
+    enabled: false  # More complex, enable after baseline works
+    d_model: 128
+    nhead: 8
+    num_layers: 4
+    dropout: 0.5
+
+# Loss function configuration
+loss:
+  type: "focal_loss"  # Per guide for imbalanced data
+  focal_loss:
+    alpha: 0.05  # Aggressive for pre-spike detection (0.5-2% positive class)
+    gamma: 4.0  # Higher focusing for extreme imbalance (vs 2.0 default)
+
+  # Alternative losses for experimentation
+  alternatives:
+    weighted_bce:
+      enabled: false
+      pos_weight: 10.0
+
+# Optimization configuration
+optimizer:
+  type: "adam"
+  learning_rate: 0.0001  # 1e-4 to 1e-3 per guide
+  weight_decay: 0.0001
+  betas: [0.9, 0.999]
+  eps: 1e-8
+
+  # Learning rate scheduling
+  scheduler:
+    enabled: true
+    type: "reduce_on_plateau"
+    mode: "max"  # Maximize precision
+    factor: 0.5
+    patience: 5
+    min_lr: 0.00001
+
+# Training configuration
+training:
+  # Basic settings
+  batch_size: 64
+  epochs: 100
+  early_stopping:
+    enabled: true
+    monitor: "val_precision"  # Monitor precision not loss per guide
+    patience: 15
+    min_delta: 0.001
+    mode: "max"
+
+  # Data handling
+  num_workers: 4
+  pin_memory: true
+  shuffle: true
+  drop_last: true  # For consistent batch sizes
+
+  # Gradient handling
+  gradient_clipping:
+    enabled: true
+    max_norm: 1.0
+
+  # Mixed precision training
+  mixed_precision:
+    enabled: true
+    dtype: "float16"  # FP16 quantization (2x speedup per guide)
+
+  # Validation
+  validation_frequency: 1  # Every epoch
+  validation_split: 0.15
+
+# Data preprocessing
+preprocessing:
+  # Normalization
+  normalization:
+    method: "standard"  # StandardScaler
+    per_feature: true
+
+  # Feature scaling
+  scaling:
+    clip_outliers: true
+    clip_std: 3  # Clip at ±3σ
+
+  # Sequence padding
+  padding:
+    method: "zero"
+    position: "pre"
+
+# Class imbalance handling
+imbalance:
+  # SMOTE oversampling (per guide)
+  # NOTE: Disabled for pre-spike detection due to high dimensionality (24 features × 60 seq = 1440D)
+  # Using strategic undersampling instead for better performance
+  smote:
+    enabled: false
+    sampling_strategy: 0.15  # 1:6.67 ratio (guide: 1:5 to 1:10)
+    k_neighbors: 5
+
+  # Strategic undersampling (alternative to SMOTE)
+  undersampling:
+    enabled: true
+    ratio: 0.20  # 1:5 ratio (keep 20% of negatives relative to positives)
+    random_state: 42
+
+  # Batch balancing (per guide)
+  batch_balanced_sampling:
+    enabled: true
+    minority_fraction: 0.4  # 40% minority class per batch
+
+  # Class weights (alternative to Focal Loss)
+  class_weights:
+    enabled: false  # Using Focal Loss instead
+    auto: true
+
+# Feature selection
+feature_selection:
+  # Boruta algorithm (per guide)
+  boruta:
+    enabled: true
+    n_estimators: 100  # Random forest estimators
+    max_iter: 100
+    random_state: 42
+    perc: 100  # Percentile for importance threshold
+    alpha: 0.05  # Significance level
+
+  # Expected feature reduction: 100+ → 30-40 (per guide)
+  target_feature_count: 35
+
+  # Feature importance tracking
+  track_importance: true
+  importance_threshold: 0.01
+
+# Model ensemble configuration
+# NOTE: DISABLED for pre-spike detection (single model approach)
+# With only 26 days of data (~150-200 positive examples), training multiple
+# models won't provide meaningful diversity. Use single strong model instead.
+ensemble:
+  enabled: false  # Single model for pre-spike detection
+
+  # Ensemble strategy (for future with 81+ days data)
+  method: "weighted_voting"  # Sharpe-weighted per guide
+  n_models: 3  # Reduced from 5 (3 models when enabled)
+
+  # Weight calculation
+  weighting:
+    metric: "sharpe_ratio"  # w_i = exp(SR_i) / Σ exp(SR_j) per guide
+    reweight_frequency_days: 5  # Recalculate weights every 5 days
+    min_validation_window: 14  # Minimum days for Sharpe calculation
+
+  # Voting thresholds
+  thresholds:
+    min_agreement: 0.75  # 75% minimum per guide
+    high_confidence: 0.90  # 90% for increased position size per guide
+
+  # Model diversity
+  diversity:
+    different_seeds: true
+    different_architectures: true
+    different_windows: true
+
+# Walk-forward validation (per guide)
+walk_forward:
+  enabled: true
+  train_window_days: 45  # 30-60 days per guide
+  validation_window_days: 10  # 7-14 days per guide
+  test_window_days: 10  # 7-14 days per guide
+  step_days: 7  # Roll forward every 7 days per guide
+  min_train_samples: 1000
+
+# Target structure (UPDATED October 2025 - Pre-Spike Detection)
+target:
+  type: "pre_spike"  # Detect accumulation 1-3 minutes before spike
+  price_window: 3  # Minutes to look ahead for price spike
+  volume_window: 2  # Minutes to look ahead for volume explosion
+  min_price_spike: 0.06  # 6% minimum price move in next 3 minutes
+  min_volume_spike: 5.0  # 5x volume increase in next 1-2 minutes
+
+  # Trading parameters
+  stop_loss_pct: 0.0075  # 0.75% stop loss (8:1 reward-risk ratio for 6% targets)
+  target_signals_per_day: 3  # 2-4 high-conviction signals (via threshold optimization)
+
+# Model evaluation metrics
+evaluation:
+  # Primary metrics (per guide)
+  primary_metrics:
+    - "precision"  # Target 90%+ per guide
+    - "recall"
+    - "f1_score"
+    - "auc_pr"  # AUC-PR preferred for imbalanced per guide
+    - "mcc"  # Matthews Correlation Coefficient per guide
+
+  # Trading-specific metrics
+  trading_metrics:
+    - "sharpe_ratio"  # Target 1.3-1.8 per guide
+    - "max_drawdown"
+    - "win_rate"
+    - "profit_factor"
+
+  # Threshold optimization
+  threshold_optimization:
+    enabled: true
+    metric: "f1_score"  # Optimize F1 per guide
+    search_range: [0.01, 0.5]  # Lower range for pre-spike (extreme imbalance)
+    search_steps: 50  # More granularity for finding optimal 2-4 signals/day
+    target_signals_per_day: 3  # Optimize for 2-4 high-conviction signals
+
+# Model persistence
+persistence:
+  save_best_only: true
+  save_frequency: "epoch"
+  checkpoint_dir: "models/checkpoints"
+  model_dir: "models/trained"
+  versioning: true
+
+  # Model format
+  formats:
+    pytorch: true  # Native .pth format
+    onnx: true  # For optimization (5-20ms latency per guide)
+    torchscript: false
+
+# Inference optimization
+inference:
+  # Quantization (per guide)
+  quantization:
+    enabled: true
+    dtype: "float16"  # FP16: 2x speedup, <1% accuracy loss per guide
+
+  # Batch inference
+  batch_size: 32
+  max_latency_ms: 50  # Target <50ms per guide
+
+  # Device
+  device: "mps"  # Metal Performance Shaders for Apple Silicon
+  fallback_device: "cpu"
+
+# Monitoring during training
+monitoring:
+  # Metrics to track
+  track_metrics:
+    - "train_loss"
+    - "val_loss"
+    - "train_precision"
+    - "val_precision"
+    - "train_recall"
+    - "val_recall"
+    - "learning_rate"
+
+  # Tensorboard
+  tensorboard:
+    enabled: true
+    log_dir: "logs/tensorboard"
+
+  # Progress reporting
+  verbose: 1  # 0=silent, 1=progress, 2=detailed
+
+# Reproducibility
+reproducibility:
+  seed: 42
+  deterministic: true
+  benchmark: false  # True for speed, False for reproducibility
+
+# Expected performance targets (from guide)
+performance_targets:
+  accuracy: 0.8244  # 82.44% per guide Bitcoin research
+  precision: 0.90  # 90%+ per guide
+  recall: 0.60  # Accept lower recall for high precision
+  sharpe_ratio: 1.48  # Guide ensemble achievement
+  annual_return: 0.626  # 62.6% per guide
+  max_drawdown: -0.0073  # -0.73% per guide

@@ -1,0 +1,642 @@
+# Pythia Trading System Configuration
+
+# Trading pairs configuration
+trading:
+  # Primary market context pairs (not traded, used as features)
+  context_pairs:
+    - "BTC-USD"
+    - "ETH-USD"
+
+  # Altcoin targets (mid-cap $100M-$5B, >$10M daily volume)
+  # Start with a smaller set, expand after validation
+  # All 319 trading pairs from historical database
+  target_pairs:
+    - "00-USD"
+    - "1INCH-USD"
+    - "A8-USD"
+    - "AAVE-USD"
+    - "ABT-USD"
+    - "ACH-USD"
+    - "ACS-USD"
+    - "ACX-USD"
+    - "ADA-USD"
+    - "AERGO-USD"
+    - "AERO-USD"
+    - "AGLD-USD"
+    - "AIOZ-USD"
+    - "AKT-USD"
+    - "ALCX-USD"
+    - "ALEO-USD"
+    - "ALEPH-USD"
+    - "ALGO-USD"
+    - "ALICE-USD"
+    - "ALT-USD"
+    - "AMP-USD"
+    - "ANKR-USD"
+    - "APE-USD"
+    - "API3-USD"
+    - "APT-USD"
+    - "ARB-USD"
+    - "ARKM-USD"
+    - "ARPA-USD"
+    - "ASM-USD"
+    - "AST-USD"
+    - "ATH-USD"
+    - "ATOM-USD"
+    - "AUCTION-USD"
+    - "AUDIO-USD"
+    - "AURORA-USD"
+    - "AVAX-USD"
+    - "AVNT-USD"
+    - "AVT-USD"
+    - "AWE-USD"
+    - "AXL-USD"
+    - "AXS-USD"
+    - "B3-USD"
+    - "BADGER-USD"
+    - "BAL-USD"
+    - "BAND-USD"
+    - "BARD-USD"
+    - "BAT-USD"
+    - "BCH-USD"
+    - "BERA-USD"
+    - "BICO-USD"
+    - "BIGTIME-USD"
+    - "BIO-USD"
+    - "BLAST-USD"
+    - "BLUR-USD"
+    - "BLZ-USD"
+    - "BNKR-USD"
+    - "BNT-USD"
+    - "BOBA-USD"
+    - "BONK-USD"
+    - "BTRST-USD"
+    - "C98-USD"
+    - "CAKE-USD"
+    - "CBETH-USD"
+    - "CELR-USD"
+    - "CGLD-USD"
+    - "CHZ-USD"
+    - "CLANKER-USD"
+    - "CLV-USD"
+    - "COMP-USD"
+    - "COOKIE-USD"
+    - "CORECHAIN-USD"
+    - "COSMOSDYDX-USD"
+    - "COTI-USD"
+    - "COW-USD"
+    - "CRO-USD"
+    - "CRV-USD"
+    - "CTSI-USD"
+    - "CTX-USD"
+    - "CVC-USD"
+    - "CVX-USD"
+    - "DAI-USD"
+    - "DASH-USD"
+    - "DEGEN-USD"
+    - "DEXT-USD"
+    - "DIA-USD"
+    - "DIMO-USD"
+    - "DNT-USD"
+    - "DOGE-USD"
+    - "DOGINME-USD"
+    - "DOLO-USD"
+    - "DOT-USD"
+    - "DRIFT-USD"
+    - "EDGE-USD"
+    - "EGLD-USD"
+    - "EIGEN-USD"
+    - "ELA-USD"
+    - "ENA-USD"
+    - "ENS-USD"
+    - "EOS-USD"
+    - "ERA-USD"
+    - "ETC-USD"
+    - "ETHFI-USD"
+    - "EUL-USD"
+    - "FAI-USD"
+    - "FARM-USD"
+    - "FARTCOIN-USD"
+    - "FET-USD"
+    - "FIDA-USD"
+    - "FIL-USD"
+    - "FIS-USD"
+    - "FLOCK-USD"
+    - "FLOKI-USD"
+    - "FLOW-USD"
+    - "FLR-USD"
+    - "FORT-USD"
+    - "FORTH-USD"
+    - "FOX-USD"
+    - "G-USD"
+    - "GFI-USD"
+    - "GHST-USD"
+    - "GIGA-USD"
+    - "GLM-USD"
+    - "GMT-USD"
+    - "GNO-USD"
+    - "GODS-USD"
+    - "GRT-USD"
+    - "GST-USD"
+    - "GTC-USD"
+    - "HBAR-USD"
+    - "HFT-USD"
+    - "HIGH-USD"
+    - "HNT-USD"
+    - "HOME-USD"
+    - "HONEY-USD"
+    - "HOPR-USD"
+    - "ICP-USD"
+    - "IDEX-USD"
+    - "ILV-USD"
+    - "IMX-USD"
+    - "INDEX-USD"
+    - "INJ-USD"
+    - "INV-USD"
+    - "IO-USD"
+    - "IOTX-USD"
+    - "IP-USD"
+    - "JASMY-USD"
+    - "JITOSOL-USD"
+    - "JTO-USD"
+    - "KAITO-USD"
+    - "KARRAT-USD"
+    - "KAVA-USD"
+    - "KERNEL-USD"
+    - "KEYCAT-USD"
+    - "KMNO-USD"
+    - "KNC-USD"
+    - "KRL-USD"
+    - "KSM-USD"
+    - "L3-USD"
+    - "LA-USD"
+    - "LAYER-USD"
+    - "LCX-USD"
+    - "LDO-USD"
+    - "LINK-USD"
+    - "LOKA-USD"
+    - "LPT-USD"
+    - "LQTY-USD"
+    - "LRC-USD"
+    - "LRDS-USD"
+    - "LSETH-USD"
+    - "LTC-USD"
+    - "MAGIC-USD"
+    - "MAMO-USD"
+    - "MANA-USD"
+    - "MANTLE-USD"
+    - "MASK-USD"
+    - "MATH-USD"
+    - "MATIC-USD"
+    - "MDT-USD"
+    - "ME-USD"
+    - "METIS-USD"
+    - "MINA-USD"
+    - "MKR-USD"
+    - "MLN-USD"
+    - "MNDE-USD"
+    - "MOG-USD"
+    - "MOODENG-USD"
+    - "MORPHO-USD"
+    - "MPLX-USD"
+    - "MSOL-USD"
+    - "MUSE-USD"
+    - "NCT-USD"
+    - "NEAR-USD"
+    - "NEON-USD"
+    - "NEWT-USD"
+    - "NKN-USD"
+    - "NMR-USD"
+    - "OCEAN-USD"
+    - "OGN-USD"
+    - "OMNI-USD"
+    - "ONDO-USD"
+    - "OP-USD"
+    - "ORCA-USD"
+    - "OSMO-USD"
+    - "OXT-USD"
+    - "PAX-USD"
+    - "PAXG-USD"
+    - "PENDLE-USD"
+    - "PENGU-USD"
+    - "PEPE-USD"
+    - "PERP-USD"
+    - "PIRATE-USD"
+    - "PLU-USD"
+    - "PNG-USD"
+    - "PNUT-USD"
+    - "POL-USD"
+    - "POLS-USD"
+    - "POND-USD"
+    - "POPCAT-USD"
+    - "POWR-USD"
+    - "PRCL-USD"
+    - "PRIME-USD"
+    - "PRO-USD"
+    - "PROMPT-USD"
+    - "PROVE-USD"
+    - "PUMP-USD"
+    - "PUNDIX-USD"
+    - "PYR-USD"
+    - "PYTH-USD"
+    - "QI-USD"
+    - "QNT-USD"
+    - "RAD-USD"
+    - "RARE-USD"
+    - "RARI-USD"
+    - "RED-USD"
+    - "RENDER-USD"
+    - "REQ-USD"
+    - "REZ-USD"
+    - "RLC-USD"
+    - "RONIN-USD"
+    - "ROSE-USD"
+    - "RPL-USD"
+    - "RSC-USD"
+    - "RSR-USD"
+    - "S-USD"
+    - "SAFE-USD"
+    - "SAND-USD"
+    - "SAPIEN-USD"
+    - "SD-USD"
+    - "SEAM-USD"
+    - "SEI-USD"
+    - "SHDW-USD"
+    - "SHIB-USD"
+    - "SHPING-USD"
+    - "SKL-USD"
+    - "SKY-USD"
+    - "SNX-USD"
+    - "SPA-USD"
+    - "SPELL-USD"
+    - "SPK-USD"
+    - "SPX-USD"
+    - "SQD-USD"
+    - "STG-USD"
+    - "STORJ-USD"
+    - "STRK-USD"
+    - "STX-USD"
+    - "SUI-USD"
+    - "SUKU-USD"
+    - "SUPER-USD"
+    - "SUSHI-USD"
+    - "SWELL-USD"
+    - "SWFTC-USD"
+    - "SXT-USD"
+    - "SYRUP-USD"
+    - "T-USD"
+    - "TAO-USD"
+    - "TIA-USD"
+    - "TIME-USD"
+    - "TNSR-USD"
+    - "TOSHI-USD"
+    - "TOWNS-USD"
+    - "TRAC-USD"
+    - "TRB-USD"
+    - "TREE-USD"
+    - "TRU-USD"
+    - "TRUMP-USD"
+    - "TURBO-USD"
+    - "UMA-USD"
+    - "UNI-USD"
+    - "USD1-USD"
+    - "USDS-USD"
+    - "USELESS-USD"
+    - "VARA-USD"
+    - "VELO-USD"
+    - "VET-USD"
+    - "VOXEL-USD"
+    - "VTHO-USD"
+    - "VVV-USD"
+    - "W-USD"
+    - "WAXL-USD"
+    - "WCFG-USD"
+    - "WCT-USD"
+    - "WELL-USD"
+    - "WIF-USD"
+    - "WLD-USD"
+    - "WLFI-USD"
+    - "XCN-USD"
+    - "XLM-USD"
+    - "XTZ-USD"
+    - "XYO-USD"
+    - "YFI-USD"
+    - "ZEC-USD"
+    - "ZEN-USD"
+    - "ZETA-USD"
+    - "ZETACHAIN-USD"
+    - "ZK-USD"
+    - "ZKC-USD"
+    - "ZORA-USD"
+    - "ZRO-USD"
+    - "ZRX-USD"
+    # New listings added 2026-01-07
+    - "2Z-USD"
+    - "ALLO-USD"
+    - "APR-USD"
+    - "ASTER-USD"
+    - "BEAM-USD"
+    - "BNB-USD"
+    - "BOBBOB-USD"
+    - "BREV-USD"
+    - "CFG-USD"
+    - "DBR-USD"
+    - "FLUID-USD"
+    - "HYPER-USD"
+    - "IRYS-USD"
+    - "JUPITER-USD"
+    - "KITE-USD"
+    - "KTA-USD"
+    - "LIGHTER-USD"
+    - "LINEA-USD"
+    - "MET-USD"
+    - "MON-USD"
+    - "NOICE-USD"
+    - "NOM-USD"
+    - "PLUME-USD"
+    - "RECALL-USD"
+    - "RLS-USD"
+    - "SOL-USD"
+    - "SUP-USD"
+    - "SYND-USD"
+    - "THQ-USD"
+    - "TON-USD"
+    - "TROLL-USD"
+    - "TRUST-USD"
+    - "WET-USD"
+    - "WMTX-USD"
+    - "XAN-USD"
+    - "XPL-USD"
+    - "XRP-USD"
+    - "YB-USD"
+    - "ZKP-USD"
+  pair_criteria:
+    min_market_cap_usd: 100_000_000  # $100M
+    max_market_cap_usd: 5_000_000_000  # $5B
+    min_daily_volume_usd: 10_000_000  # $10M
+    min_volatility: 0.02  # 2% daily volatility minimum
+
+# Coinbase WebSocket configuration
+websocket:
+  endpoint: "wss://advanced-trade-ws.coinbase.com"
+  channels:
+    # NOTE: level2 disabled - Coinbase limits L2 streams to ~100 per session
+    # Using ticker instead - it includes best_bid/best_ask without stream limits
+    # - "level2"  # Order book snapshots - DISABLED due to stream limits
+    - "ticker"  # Includes best_bid, best_ask, price, volume - for spread calculation
+    - "market_trades"  # 250ms batched executions - sufficient for OHLCV & features
+    - "heartbeats"  # Prevents 60-90s timeout on illiquid pairs
+
+  # JWT token refresh (ES256)
+  jwt_refresh_interval_seconds: 90  # Refresh every 90s (2min expiration)
+
+  # Connection management
+  reconnect_delay_seconds: 5
+  max_reconnect_delay_seconds: 60
+  reconnect_backoff_multiplier: 1.5
+
+  # Message handling
+  message_queue_size: 10000
+  batch_insert_interval_seconds: 5
+
+# Data storage configuration
+database:
+  path: "market_data.duckdb"  # Updated to match XGBoost training & spike detector
+
+  # Retention policies
+  retention:
+    trades_days: 90
+    orderbook_snapshots_days: 30
+    ohlcv_days: 365
+    features_days: 180
+
+  # Batch writing
+  batch_size: 1000
+  batch_timeout_seconds: 5
+
+# Feature engineering configuration
+features:
+  # Timeframes
+  timeframes:
+    primary: "5m"  # Primary analysis timeframe
+    confirmation: "15m"  # Trend confirmation
+    entry: "1m"  # Precise entry timing
+
+  # Lookback windows (in bars)
+  lookback:
+    indicators: 100  # 8.3 hours on 5m (50-100 bars per guide)
+    model_input: 60  # 5 hours for LSTM input (30-60 days converted to bars)
+    prediction_horizon: 10  # 50 minutes ahead (5-15 bars per guide)
+
+  # Order book configuration
+  order_book:
+    depth_levels: 5  # L=5 per guide
+    snapshot_interval_seconds: 10
+    imbalance_threshold: 0.3  # |ρ| > 0.3 signals directional pressure
+
+  # Microstructure indicators
+  microstructure:
+    roll_window: 100  # 50-100 bars per guide
+    vpin_window: 50
+    vpin_threshold: 0.5  # > 0.5 indicates high informed trading
+
+  # Volume indicators
+  volume:
+    spike_ratio_threshold: 2.0  # 2x average = anomaly
+    spike_window: 20
+
+  # Price indicators
+  price:
+    rsi_period: 14
+    vwap_std_bands: [1, 2, 3]  # Standard deviation multiples
+    vwap_deviation_threshold: 0.05  # 5% from VWAP (3-5% per guide)
+    bollinger_period: 20
+    bollinger_std: 2
+
+  # Whale detection
+  whale:
+    size_multiplier: 10  # 10x average order size
+
+# Signal generation configuration
+signals:
+  # Ensemble voting
+  ensemble:
+    min_agreement_threshold: 0.75  # 75% minimum (75-90% per guide)
+    high_confidence_threshold: 0.90  # 90% for increased position size
+    model_count: 5  # 3-5 models per guide
+
+  # Confidence scoring
+  confidence:
+    min_score: 0.7  # 0.7-0.8 per guide
+    target_precision: 0.90  # 90%+ precision target
+
+  # Signal filtering
+  filters:
+    min_volume_usd: 10000  # Minimum trade volume
+    require_timeframe_alignment: true  # 5m and 15m must align
+    require_obv_confirmation: true
+    require_vwap_validation: true
+
+  # Expected signal rate
+  target_signals_per_day: 3  # Target 2-4 per guide
+  max_signals_per_day: 6  # Hard limit
+
+# Risk management configuration
+risk:
+  # Position sizing
+  position_sizing:
+    method: "fixed_fractional"
+    risk_per_trade_pct: 0.015  # 1.5% (1-2% per guide)
+    min_position_size_usd: 100
+    max_position_size_usd: 10000
+
+  # Stop loss
+  stop_loss:
+    atr_multiplier: 2.5  # 2-3x ATR per guide
+    use_exchange_stops: true
+    use_local_stops: true
+
+  # Portfolio limits
+  portfolio:
+    max_total_exposure_multiplier: 2.5  # 2-3x capital per guide
+    max_correlated_exposure_pct: 0.30  # Max 30% in correlated assets
+    max_single_pair_exposure_pct: 0.20  # Max 20% in one pair
+
+  # Daily limits
+  daily:
+    max_loss_pct: 0.075  # 7.5% (5-10% per guide) - circuit breaker
+    max_trades: 10
+    max_consecutive_losses: 3  # Reduce size after 3 losses
+
+  # Volatility adjustment
+  volatility:
+    enabled: true
+    lookback_days: 14
+    scale_inverse: true  # Reduce size in high volatility
+
+# Execution configuration
+execution:
+  # Order types
+  default_order_type: "limit"
+  limit_order_offset_pct: 0.001  # 0.1% from market
+
+  # Slippage and fees
+  expected_slippage_pct: 0.001  # 0.1%
+  maker_fee_pct: 0.0006  # Coinbase Advanced Trade maker fee
+  taker_fee_pct: 0.001  # Coinbase Advanced Trade taker fee
+
+  # Order management
+  order_timeout_seconds: 30
+  cancel_unfilled_after_seconds: 60
+  position_reconciliation_interval_seconds: 60
+
+# Monitoring and logging configuration
+monitoring:
+  # Logging
+  log_level: "INFO"
+  log_file: "logs/pythia.log"
+  log_rotation: "1 day"
+  log_retention: "30 days"
+  structured_logging: true
+
+  # Metrics
+  metrics_enabled: true
+  metrics_port: 9090  # Prometheus
+
+  # Alerts
+  alerts:
+    telegram:
+      enabled: false
+      chat_id: ""
+    email:
+      enabled: false
+      smtp_server: ""
+      smtp_port: 587
+      recipients: []
+
+  # Alert triggers
+  alert_triggers:
+    circuit_breaker_activated: true
+    daily_loss_threshold_pct: 0.05  # Alert at 5% loss
+    api_error_count: 10  # Alert after 10 consecutive errors
+    websocket_disconnection: true
+    low_precision_threshold: 0.70  # Alert if precision drops below 70%
+
+# Backtesting configuration
+backtesting:
+  enabled: true
+  start_date: "2021-01-01"
+  end_date: "2024-01-01"
+  initial_capital: 10000
+  commission_pct: 0.001
+  slippage_pct: 0.001
+
+# Model training configuration (high-level, details in model_config.yaml)
+training:
+  data_split:
+    train_window_days: 45  # 30-60 days per guide
+    validation_window_days: 10  # 7-14 days per guide
+    test_window_days: 10
+    roll_forward_days: 7  # Walk-forward every 7 days
+
+  target:
+    type: "local_extrema"  # Binary classification of 7-14 day extrema
+    window_days: 10  # 7-14 day window per guide
+
+  retraining:
+    enabled: true
+    interval_days: 7  # Retrain weekly
+    min_samples: 1000  # Minimum samples before training
+
+# News monitoring configuration
+news_monitoring:
+  enabled: true
+  scan_interval: 30  # Seconds between scan cycles
+  min_confidence: 0.5  # Minimum confidence for signal emission
+  signal_cooldown: 1800  # Seconds before same symbol can trigger again
+
+  # Source configuration
+  sources:
+    exchange_listings:
+      enabled: true
+      # RSS feeds for Coinbase/Binance announcements (no API key needed)
+
+    whale_alert:
+      enabled: true
+      min_usd_value: 1000000  # $1M minimum transfer
+      # API key from WHALE_ALERT_API_KEY env var (free tier: 10 req/min)
+
+    twitter_rss:
+      enabled: true
+      # Uses Nitter RSS feeds (no API key needed)
+      accounts:
+        - CoinbaseAssets
+        - binance
+        - whale_alert
+
+    reddit:
+      enabled: true
+      min_upvotes: 50  # Minimum upvotes for signal
+      subreddits:
+        - cryptocurrency
+        - CryptoMarkets
+        - altcoin
+      # API credentials from REDDIT_CLIENT_ID and REDDIT_CLIENT_SECRET env vars
+
+  # Event priority scoring (used in confidence calculation)
+  event_priority:
+    listing: 1.0
+    delisting: 0.9
+    whale_move: 0.9
+    partnership: 0.7
+    upgrade: 0.7
+    airdrop: 0.6
+    sentiment_spike: 0.5
+    mention: 0.3
+
+# System configuration
+system:
+  environment: "development"  # development, staging, production
+  paper_trading: true  # Start with paper trading
+  max_workers: 4  # Asyncio worker tasks
+  enable_gpu: true  # Use MPS on Apple Silicon

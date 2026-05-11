@@ -1,0 +1,91 @@
+# Databases
+*.db
+*.duckdb
+*.duckdb.wal
+*.db-journal
+*.db-wal
+
+# Data directory (large files)
+data/
+!data/.gitkeep
+
+# Virtual environment
+venv/
+
+# Logs
+logs/
+*.log
+collector_output.log
+
+# State files
+.collector.pid
+paper_trading_state*.json
+data/loading_trader_state.json
+
+# Models (large binary files)
+models/fizzler_filter/fizzler_xgb.json
+models/fizzler_filter_v2/fizzler_xgb_v2.json
+models/fizzler_filter_v2/cnn_encoder*.pt
+models/fizzler_filter_v2/v1_vs_v2_comparison.png
+models/xgboost_full_dataset/
+*.pth
+*.pt
+*.onnx
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Images/plots (generated)
+*.png
+*.jpg
+
+# CSV data files
+*.csv
+
+# Secrets / credentials
+*.pem
+*.key
+.env
+config/.env
+
+# IDE
+.idea/
+
+# Misc
+.DS_Store
+*.parquet
+untitled folder/
+
+# State files (runtime)
+*_state.json
+*_state_backup*.json
+*.json.backup_*
+paper_trades.db-shm
+
+# Generated docs (keep strategies.md, CLAUDE.md)
+DATABASE_SCHEMA_SAMPLE.md
+EXIT_STRATEGY_OPTIMIZATION_REPORT.md
+FILE_STRUCTURE.md
+ITERATION_2_RESULTS.md
+ITERATION3_RESULTS.md
+PRODUCTION_CONFIG.md
+SESSION_RECOVERY.md
+STRATEGY_RESEARCH.md
+
+# Misc text
+coin_profiles.txt
+spike_features.txt
+spike_alerts.json
+
+# Model experiment artifacts and RL training runs
+models/experiments/
+models/experiments_precision/
+models/rl/
+models/*.pkl
+*.pkl
+
+# RTF docs
+*.rtf

@@ -1,0 +1,1 @@
+Be more proactive in completing tasks. For example if I say “restart the collector”, that may take several steps like killing the current process and starting a new process. You should just do those processes until the goal of “restart the collector” is accomplished. 

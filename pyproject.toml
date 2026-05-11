@@ -1,0 +1,65 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pythia2"
+version = "0.2.0"
+description = "Loading-strategy crypto scalping with neural-net + RL fizzler filter"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "All Rights Reserved" }
+authors = [{ name = "Brett Zeigler" }]
+keywords = ["cryptocurrency", "trading", "machine-learning", "reinforcement-learning", "coinbase"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Financial and Insurance Industry",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+# Pinned versions live in requirements.txt (core) and requirements_rl.txt (RL).
+# Declared here without pins so package introspection works.
+dependencies = [
+    "python-dotenv",
+    "pyyaml",
+    "pydantic",
+    "pydantic-settings",
+    "aiohttp",
+    "websockets",
+    "cryptography",
+    "pyjwt",
+    "ccxt",
+    "duckdb",
+    "sqlalchemy",
+    "pandas",
+    "numpy",
+    "polars",
+    "pyarrow",
+    "scikit-learn",
+    "xgboost",
+    "torch",
+    "loguru",
+]
+
+[project.optional-dependencies]
+rl = [
+    "stable-baselines3",
+    "gymnasium",
+]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "ruff",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"

@@ -1,0 +1,53 @@
+# RL Trading System Dependencies
+# Pythia2 Reinforcement Learning Module
+
+# Core RL Framework
+stable-baselines3>=2.2.1
+gymnasium>=0.29.1
+
+# Deep Learning
+torch>=2.1.0
+torchvision>=0.16.0
+
+# Data Processing
+duckdb>=0.9.0
+pandas>=2.0.0
+numpy>=1.24.0
+pyarrow>=14.0.0
+
+# Scientific Computing
+scipy>=1.11.0
+scikit-learn>=1.3.0
+
+# Monitoring and Logging
+wandb>=0.16.0
+tensorboard>=2.15.0
+loguru>=0.7.0
+
+# Configuration
+hydra-core>=1.3.0
+omegaconf>=2.3.0
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+# Type checking
+mypy>=1.6.0
+types-dataclasses>=0.6.0
+
+# Utilities
+tqdm>=4.66.0
+python-dotenv>=1.0.0
+pyyaml>=6.0.1
+
+# Optional: Visualization
+matplotlib>=3.8.0
+seaborn>=0.13.0
+plotly>=5.18.0
+
+# Optional: Advanced RL algorithms
+# sb3-contrib>=2.2.1  # For additional algorithms like TQC, TRPO
+
+# Optional: Hyperparameter optimization
+# optuna>=3.4.0
