@@ -15,18 +15,21 @@ import tempfile
 from pathlib import Path
 from datetime import datetime, timedelta
 
+import pytest
+
+# RL deps are an optional extra (`pip install -e ".[rl]"`). Skip the whole
+# module if they're not available rather than failing test collection.
+gym = pytest.importorskip("gymnasium")
+spaces = pytest.importorskip("gymnasium.spaces")
+
 import numpy as np
 import pandas as pd
 import torch
-import gymnasium as gym
-from gymnasium import spaces
+from loguru import logger
 
 # Add project root to path
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
-
-import pytest
-from loguru import logger
 
 # Configure loguru for tests
 logger.remove()
